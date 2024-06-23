@@ -1,0 +1,6 @@
+providers:
+    provider_a:
+        base_url: https://inmuebles.mercadolibre.com.ar
+        sources:
+          - departamentos/departamento-3-ambientes
+disable_ssl:  false
