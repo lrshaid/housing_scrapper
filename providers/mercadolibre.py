@@ -26,21 +26,19 @@ class Mercadolibre(BaseProvider):
 
             for prop in properties:
                 #section = prop.find('a', class_='ui-search-result__link')
-                section = prop.find('div',class_='ui-search-item__group__element ui-search-item__title-grid')
-                
-                if section is None:
-                    section = prop.find('a', class_='ui-search-result__content')
+                info = prop.find('div',class_='ui-search-result__content-wrapper')
+                section = info.find('div', class_ ="ui-search-item__group__element ui-search-item__title-grid")
                 href = section.next.attrs['href']
                 matches = re.search(regex, href)
                 internal_id = matches.group(1).replace('-', '')
-                price_section = section.find('span', class_='price-tag')
-                title_section = section.find('div', class_='ui-search-item__group--title')
+                price_section = info.find('div', class_='ui-search-item__group__element ui-search-item__group--price-grid').getText().strip().replace(".","")
+                title_section = section.getText()
                 title = section.text#.find('span').get_text().strip() + \   ': ' + title_section.find('h2').get_text().strip()
                 if price_section is not None:
-                    title = title + ' ' + price_section.get_text().strip()
+                    title = title + ' ' + price_section.strip()
         
                 yield {
-                    'title': title, 
+                    'title': title_section, 
                     'url': href,
                     'internal_id': internal_id,
                     'provider': self.provider_name
