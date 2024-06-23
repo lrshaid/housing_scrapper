@@ -1,6 +1,6 @@
 providers:
-    provider_a:
+    provider_a: mercadolibre
         base_url: https://inmuebles.mercadolibre.com.ar
         sources:
-          - departamentos/departamento-3-ambientes
+          - /departamentos/alquiler/capital-federal/belgrano-o-belgrano-r-o-belgrano-chico-o-belgrano-c-o-belgrano-barrancas/departamento-3-ambientes
 disable_ssl:  false
