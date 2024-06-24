@@ -1,6 +1,13 @@
+notifier:
+    messages:
+      - 'A MESSAGE'
+    enabled: true
+    chat_id: 715390857
+    token: '7093567136:AAHvflgRH0cof6oW4FAzYlthpb8T3hbBak8'
+
 providers:
-    provider_a: mercadolibre
-        base_url: https://inmuebles.mercadolibre.com.ar
+    mercadolibre:
+        base_url: 'https://inmuebles.mercadolibre.com.ar'
         sources:
-          - /departamentos/alquiler/capital-federal/belgrano-o-belgrano-r-o-belgrano-chico-o-belgrano-c-o-belgrano-barrancas/departamento-3-ambientes
+          - '/departamentos/alquiler/capital-federal/belgrano-o-belgrano-r-o-belgrano-chico-o-belgrano-c-o-belgrano-barrancas/departamento-3-ambientes'
 disable_ssl:  false

@@ -9,7 +9,7 @@ with open("configuration.yml", 'r') as ymlfile:
     cfg = yaml.safe_load(ymlfile)
 
 for provider_name, provider_data in cfg['providers'].items():
-    
+
     #provider=Mercadolibre(provider_name, provider_data)#.props_in_source(provider_data)
     process_properties(provider_name,provider_data)
 

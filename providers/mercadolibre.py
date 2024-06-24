@@ -6,7 +6,6 @@ from providers.baseprovider import BaseProvider
 class Mercadolibre(BaseProvider):
     def props_in_source(self, source):
         page_link =self.provider_data['base_url'] + source + '_NoIndex_True'
-        print(source)
         from_ = 1
         regex = r"(MLA-\d*)"
 
@@ -25,7 +24,6 @@ class Mercadolibre(BaseProvider):
                 break
 
             for prop in properties:
-                #section = prop.find('a', class_='ui-search-result__link')
                 info = prop.find('div',class_='ui-search-result__content-wrapper')
                 section = info.find('div', class_ ="ui-search-item__group__element ui-search-item__title-grid")
                 href = section.next.attrs['href']

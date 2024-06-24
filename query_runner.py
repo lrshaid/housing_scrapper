@@ -9,6 +9,6 @@ with conn:
     cur = conn.cursor()
     #logging.info(f"Processing property {prop['internal_id']}")
     cur.execute(stmt)
-    result = cur.fetchone()
+    result = cur.fetchall()
     cur.close()
     print(result)
