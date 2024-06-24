@@ -4,6 +4,7 @@ import random
 from lib.sslless_session import SSLlessSession
 import yaml
 import asyncio
+import time
 
 class NullNotifier:
     def notify(self, properties):
@@ -18,16 +19,19 @@ class Notifier(NullNotifier):
         else:
             self.bot = telegram.Bot(token=self.config['token'])
         
-
-    def notify(self, properties):
+    async def notify_async(self, properties):
         logging.info(f'Notifying about {len(properties)} properties')
         
         for prop in properties:
             logging.info(f"Notifying about {prop['url']}")
-            asyncio.run(self.bot.send_message(chat_id=self.config['chat_id'], 
-                    text=f"[{prop['title']}]({prop['url']})"))
-                    #parse_mode=telegram.ParseMode.MARKDOWN)
+            await self.bot.send_message(chat_id=self.config['chat_id'], 
+                    text=f"[{prop['title']}]({prop['url']})")
+            await asyncio.sleep(2)
 
+    def notify(self, properties):
+        logging.info(f'Notifying about {len(properties)} properties')
+        asyncio.run(self.notify_async(properties))
+        
     def test(self, message):
         self.bot.send_message(chat_id=self.config['chat_id'], text=message)
 
