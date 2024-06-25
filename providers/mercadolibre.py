@@ -5,7 +5,7 @@ from providers.baseprovider import BaseProvider
 
 class Mercadolibre(BaseProvider):
     def props_in_source(self, source):
-        page_link =self.provider_data['base_url'] + source + '_NoIndex_True'
+        page_link =self.provider_data['base_url'] + source + '_NoIndex_True'+self.provider_data['filtros_meli']
         from_ = 1
         regex = r"(MLA-\d*)"
 
@@ -43,5 +43,5 @@ class Mercadolibre(BaseProvider):
                     }
 
             from_ += 50
-            page_link = self.provider_data['base_url'] + source + f"_Desde_{from_}_NoIndex_True"
+            page_link = self.provider_data['base_url'] + source + f"_Desde_{from_}_NoIndex_True"+self.provider_data['filtros_meli']
     

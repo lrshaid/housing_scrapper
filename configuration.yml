@@ -10,4 +10,5 @@ providers:
         base_url: 'https://inmuebles.mercadolibre.com.ar'
         sources:
           - '/departamentos/alquiler/capital-federal/belgrano-o-belgrano-r-o-belgrano-chico-o-belgrano-c-o-belgrano-barrancas/departamento-3-ambientes'
+        filtros_meli: '_Cocheras_1_TOTAL*AREA_60-*'
 disable_ssl:  false
