@@ -22,8 +22,22 @@ class Mercadolibre(BaseProvider):
 
             if len(properties) == 0:
                 break
+            if properties[0] is None:
+
+                page_content = BeautifulSoup(page_response.content, 'lxml')
+                properties = page_content.find_all('li', class_='ui-search-layout__item')
+                
+                if properties[0] is not None:
+                    pass
+                else:
+                    retry_count = retry_count+1
+                
+                if retry_count == 5:
+                    break
 
             for prop in properties:
+                if prop is None:
+                    pass
                 info = prop.find('div',class_='ui-search-result__content-wrapper')
                 section = info.find('div', class_ ="ui-search-item__group__element ui-search-item__title-grid")
                 href = section.next.attrs['href']

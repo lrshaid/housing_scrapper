@@ -26,6 +26,8 @@ class Zonaprop(BaseProvider):
 
                 if dataid in processed_ids:
                     return
+                if prop is None:
+                    pass
                 processed_ids.append(dataid)
                 title = prop.find('h3', class_="PostingDescription-sc-i1odl-11 fECErU").get_text().strip()
                 price_section = prop.find('div', class_='Price-sc-12dh9kl-3 geYYII').get_text()
