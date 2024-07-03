@@ -26,13 +26,23 @@ class Zonaprop(BaseProvider):
 
                 if dataid in processed_ids:
                     return
-                if prop is None:
+                if type(prop) is None:
                     pass
                 processed_ids.append(dataid)
-                title = prop.find('h3', class_="PostingDescription-sc-i1odl-11 fECErU").get_text().strip()
-                price_section = prop.find('div', class_='Price-sc-12dh9kl-3 geYYII').get_text()
-                if price_section is not None:
-                    title = title + ' ' + price_section
+                title=prop.find('h3', class_="PostingDescription-sc-i1odl-11 fECErU")
+                if title is None:
+                    title = None
+                else:
+                    title = prop.find('h3', class_="PostingDescription-sc-i1odl-11 fECErU").get_text().strip()
+
+                price_section = prop.find('div', class_='Price-sc-12dh9kl-3 geYYII')
+
+                if price_section is not None and title is not None:
+                    title = title + ' ' + price_section.get_text()
+                elif price_section is not None:
+                    price_section = prop.find('div', class_='Price-sc-12dh9kl-3 geYYII').get_text()
+                else:
+                    price_section=None
                     
                 yield {
                     'title': title, 

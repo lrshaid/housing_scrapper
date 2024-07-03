@@ -39,11 +39,14 @@ class Mercadolibre(BaseProvider):
                 if prop is None:
                     pass
                 info = prop.find('div',class_='ui-search-result__content-wrapper')
+                if info is None:
+                    pass
                 section = info.find('div', class_ ="ui-search-item__group__element ui-search-item__title-grid")
                 href = section.next.attrs['href']
                 matches = re.search(regex, href)
                 internal_id = matches.group(1).replace('-', '')
                 price_section = info.find('div', class_='ui-search-item__group__element ui-search-item__group--price-grid').getText().strip().replace(".","")
+
                 title_section = section.getText()
                 title = section.text#.find('span').get_text().strip() + \   ': ' + title_section.find('h2').get_text().strip()
                 if price_section is not None:
