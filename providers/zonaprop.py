@@ -18,6 +18,8 @@ class Zonaprop(BaseProvider):
             
             page_content = BeautifulSoup(page_response.content, 'lxml')
             properties = page_content.find('div', class_='postings-container').contents
+            
+            repeated = 0
 
             for prop in properties:
                 # if data-id was already processed we exit
@@ -25,7 +27,9 @@ class Zonaprop(BaseProvider):
                 #dataid = prop.find("div",class_="PostingCardLayout-sc-i1odl-0 egwEUc")#['data-id']
 
                 if dataid in processed_ids:
-                    return
+                    repeated += 1
+                    if repeated == 4:
+                        return
                 if type(prop) is None:
                     pass
                 processed_ids.append(dataid)

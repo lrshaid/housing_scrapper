@@ -28,7 +28,7 @@ def main():
 
     # Agregar manejador de mensajes de texto
     text_handler = MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message)
-    application.add_handler(text_handler)
+    application.add_handler(text_handler) 
 
     # Iniciar el bot
     application.run_polling()

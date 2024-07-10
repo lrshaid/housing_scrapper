@@ -15,6 +15,6 @@ providers:
     zonaprop:
         base_url: 'https://www.zonaprop.com.ar'
         sources:
-          - '/departamentos-alquiler-coghlan-belgrano-belgrano-c-belgrano-belgrano-chico-belgrano-belgrano-r-belgrano-mas-de-1-garage-mas-60-m2-cubiertos.html'
+          - '/departamentos-alquiler-coghlan-belgrano-saavedra-villa-urquiza-belgrano-c-belgrano-belgrano-chico-belgrano-belgrano-r-belgrano-mas-de-1-garage-mas-60-m2-cubiertos.html'
         filtros_meli: 
 disable_ssl:  false

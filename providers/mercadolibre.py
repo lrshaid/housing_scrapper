@@ -31,16 +31,16 @@ class Mercadolibre(BaseProvider):
                     pass
                 else:
                     retry_count = retry_count+1
-                
+                    
                 if retry_count == 5:
                     break
 
             for prop in properties:
                 if prop is None:
-                    pass
+                    continue
                 info = prop.find('div',class_='ui-search-result__content-wrapper')
                 if info is None:
-                    pass
+                    continue
                 section = info.find('div', class_ ="ui-search-item__group__element ui-search-item__title-grid")
                 href = section.next.attrs['href']
                 matches = re.search(regex, href)
