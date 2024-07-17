@@ -44,21 +44,27 @@ class Mercadolibre(BaseProvider):
                 if prop is None:
                     continue
 
-                info = prop.find('div',class_='ui-search-result__content-wrapper')
+                if prop.find('div',class_='ui-search-result__content-wrapper') is not None:
+                    info = prop.find('div',class_='ui-search-result__content-wrapper')
+                    section = info.find('div', class_ ="ui-search-item__group__element ui-search-item__title-grid")
+                    href = section.next.attrs['href']
+                    matches = re.search(regex, href)
+                    internal_id = matches.group(1).replace('-', '')
+                    price_section = info.find('div', class_='ui-search-item__group__element ui-search-item__group--price-grid').getText().strip().replace(".","")
 
-                if info is None:
-                    info=prop.find('div',class_= 'ui-search-result__wrapper')
-                    
-                section = info.find('div', class_ ="ui-search-item__group__element ui-search-item__title-grid")
-                href = section.next.attrs['href']
-                matches = re.search(regex, href)
-                internal_id = matches.group(1).replace('-', '')
-                price_section = info.find('div', class_='ui-search-item__group__element ui-search-item__group--price-grid').getText().strip().replace(".","")
+                    title_section = section.getText()
+                    title = section.text#.find('span').get_text().strip() + \   ': ' + title_section.find('h2').get_text().strip()
+                    if price_section is not None:
+                        title = title + ' ' + price_section.strip()
 
-                title_section = section.getText()
-                title = section.text#.find('span').get_text().strip() + \   ': ' + title_section.find('h2').get_text().strip()
-                if price_section is not None:
-                    title = title + ' ' + price_section.strip()
+                elif prop.find('div',class_='poly-card__content') is not None:
+
+                    info=prop.find('div',class_= 'poly-card__content')
+                    section = info.find('a', class_ ="poly-component__title")
+                    href = section.next.attrs['href']
+                    matches = re.search(regex, href)
+                    internal_id = matches.group(1).replace('-', '')
+                    price_section = info.find('div', class_='poly-component__price').getText().strip().replace(".","")
         
                 yield {
                     'title': title_section, 
