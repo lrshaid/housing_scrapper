@@ -1,0 +1,1 @@
+SELECT * FROM properties where id = 53968272
