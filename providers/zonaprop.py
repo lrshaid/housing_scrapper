@@ -43,11 +43,16 @@ class Zonaprop(BaseProvider):
 
                 if price_section is not None and title is not None:
                     title = title + ' ' + price_section.get_text()
+                    
+                    if len(title)>4096:
+                        title=title[:3000]
+
                 elif price_section is not None:
                     price_section = prop.find('div', class_='Price-sc-12dh9kl-3 geYYII').get_text()
                 else:
                     price_section=None
-                    
+
+
                 yield {
                     'title': title, 
                     'url': self.provider_data['base_url'] + prop.next.attrs['data-to-posting'],
