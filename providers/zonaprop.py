@@ -9,6 +9,8 @@ class Zonaprop(BaseProvider):
         page = 1
         processed_ids = []
 
+        previous_data_ids=[]
+        data_ids=[]
         while(True):
             logging.info(f"Requesting {page_link}")
             page_response = self.request(page_link)
@@ -18,18 +20,18 @@ class Zonaprop(BaseProvider):
             
             page_content = BeautifulSoup(page_response.content, 'lxml')
             properties = page_content.find('div', class_='postings-container').contents
-            
+            previous_data_ids = data_ids
             repeated = 0
-
+            data_ids=[]
             for prop in properties:
                 # if data-id was already processed we exit
                 dataid = prop.next_element['data-id']
                 #dataid = prop.find("div",class_="PostingCardLayout-sc-i1odl-0 egwEUc")#['data-id']
-
-                if dataid in processed_ids:
-                    repeated += 1
-                    if repeated == 4:
-                        return
+                data_ids += dataid
+                #if dataid in processed_ids:
+                #    repeated += 1
+                #    if repeated == 4:
+                #        return
                 if type(prop) is None:
                     pass
                 processed_ids.append(dataid)
@@ -61,5 +63,8 @@ class Zonaprop(BaseProvider):
                     }
 
             page += 1
+            if data_ids == previous_data_ids:
+                return
+
             page_link = self.provider_data['base_url'] + source.replace(".html", f"-pagina-{page}.html")
     
