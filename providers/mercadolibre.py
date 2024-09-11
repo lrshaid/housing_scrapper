@@ -60,8 +60,8 @@ class Mercadolibre(BaseProvider):
                 elif prop.find('div',class_="poly-card__content") is not None:
 
                     info=prop.find('div',class_= "poly-card__content")
-                    section = info.find('a', class_ ="poly-box poly-component__title")
-                    href = section.attrs['href']
+                    section = info.find('h2', class_ ="poly-box poly-component__title")
+                    href = section.contents[0].attrs['href']
                     matches = re.search(regex, href)
                     internal_id = matches.group(1).replace('-', '')
                     price_section = info.find('div', class_="poly-component__price").getText().strip().replace(".","")
