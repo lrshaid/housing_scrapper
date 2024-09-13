@@ -6,7 +6,7 @@ notifier:
     token: '7093567136:AAHvflgRH0cof6oW4FAzYlthpb8T3hbBak8'
 
 providers:
-    mercadolibre:
+    mercadolibree:
         base_url: 'https://inmuebles.mercadolibre.com.ar'
         sources:
           - '/departamentos/alquiler/capital-federal/belgrano-o-saavedra-o-coghlan-nunez/departamento-3-ambientes'
